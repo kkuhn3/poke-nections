@@ -12,28 +12,30 @@ function load() {
 	mistakesLeft = 0;
 	loAnswers = {};
 	wrongAnswers = [];
+	priorityCons = [];
 
 	for (let i = 0; i < 4; i++) {
-		const keys = Object.keys(loLeftCon);
-		const category = keys[ keys.length * Math.random() << 0];
-		const subkeys = Object.keys(loLeftCon[category]);
-		const subcategory = subkeys[ subkeys.length * Math.random() << 0];
-
-
-		let options = [ ...loLeftCon[category][subcategory]];
-		for (const cell of loCells) {
-			const index = options.indexOf(cell);
-			if (index > -1) {
-				options.splice(index, 1);
-			}
+		let category = null;
+		let subcategory = null;
+		if (priorityCons.length > 0) {
+			const randomCategory = priorityCons[ priorityCons.length * Math.random() << 0 ];
+			category = randomCategory[0];
+			subcategory = randomCategory[1];
+		}
+		else {
+			const keys = Object.keys(loLeftCon);
+			category = keys[ keys.length * Math.random() << 0 ];
+			const subkeys = Object.keys(loLeftCon[category]);
+			subcategory = subkeys[ subkeys.length * Math.random() << 0 ];
 		}
 
+		let options = [ ...loLeftCon[category][subcategory]];
 		let answerArr = [];
 		for (let j = 0; j < 4; j++) {
 			const index = options.length * Math.random() << 0
-			let cell = options[index];
-			loCells.push(cell);
-			answerArr.push(cell)
+			const mon = options[index];
+			loCells.push(mon);
+			answerArr.push(mon)
 			options.splice(index, 1);
 		}
 		loAnswers[category + subcategory] = answerArr;
@@ -50,25 +52,32 @@ function load() {
 			loColors[category + subcategory] = "purple";
 		}
 
-		delete loLeftCon[category];
-		for (const key in loLeftCon) {
-			for (const subkey in loLeftCon[key]) {
-				for (const mon of loLeftCon[key][subkey]) {
-					if (nections[category][subcategory].includes(mon)) {
-						index = loLeftCon[key][subkey].indexOf(mon);
-						loLeftCon[key][subkey].splice(index, 1);
-
-						if (loLeftCon[key][subkey].length < 4) {
-							delete loLeftCon[key][subkey];
-							if (loLeftCon[key].length < 1) {
-								delete loLeftCon[key];
+		if (i < 4) {
+			delete loLeftCon[category];
+			priorityCons = [];
+			for (const key in nections) {
+				for (const subkey in nections[key]) {
+					for (const mon of nections[category][subcategory]) {
+						if (loLeftCon[key] && loLeftCon[key][subkey] && loLeftCon[key][subkey].includes(mon)) {
+							index = loLeftCon[key][subkey].indexOf(mon);
+							loLeftCon[key][subkey].splice(index, 1);
+							if (loLeftCon[key][subkey].length < 4) {
+								delete loLeftCon[key][subkey];
+								if (Object.keys(loLeftCon[key]).length < 1) {
+									delete loLeftCon[key];
+								}
+								break;
 							}
-							break;
+						}
+					}
+					for (const cell of loCells) {
+						if (nections[key][subkey].includes(cell) && loLeftCon[key] && loLeftCon[key][subkey]) {
+							priorityCons.push([key, subkey]);
 						}
 					}
 				}
 			}
-		}		
+		}
 	}
 
 	completed.innerHTML = "";
@@ -96,16 +105,20 @@ function onCellClick(cell) {
 
 // Buttons
 function shuffle() {
-	cells.innerHTML = "";
-	shuffleAnArray(loCells);
-	for (const cell of loCells) {
-		cells.innerHTML += `<div class="cell" onclick="onCellClick(this)">` + cell + `</div>`;
+	if (mistakesLeft < 4) {
+		cells.innerHTML = "";
+		shuffleAnArray(loCells);
+		for (const cell of loCells) {
+			cells.innerHTML += `<div class="cell" onclick="onCellClick(this)">` + cell + `</div>`;
+		}
 	}
 }
 function deselect() {
-	const loDivs = cells.getElementsByClassName("cell");
-	for (const cell of loDivs) {
-		cell.classList.remove("selected");
+	if (mistakesLeft < 4) {
+		const loDivs = cells.getElementsByClassName("cell");
+		for (const cell of loDivs) {
+			cell.classList.remove("selected");
+		}
 	}
 }
 function submit() {

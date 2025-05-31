@@ -36903,7 +36903,7 @@ const pokedex = {
 let nections = {};
 nections["Type: "] = {};
 nections["Generation: "] = {};
-nections["Ability: "] = {};
+// nections["Ability: "] = {};
 nections["Mega-Evolution"] = {};
 nections["Mega-Evolution"][""] = [];
 nections["Gigantamax"] = {};
@@ -36912,6 +36912,9 @@ nections["Regional: "] = {};
 nections["Regional: "]["Alolan"] = [];
 nections["Regional: "]["Galarian"] = [];
 nections["Regional: "]["Hisuian"] = [];
+nections["Gender: "] = {};
+nections["Gender: "]["Male"] = [];
+nections["Gender: "]["Female"] = [];
 for (const id in pokedex) {
 	const pokemon = pokedex[id];
 	if (pokemon.num < 1) {
@@ -36970,13 +36973,19 @@ for (const id in pokedex) {
 		nections["Generation: "][gen] = [];
 	}
 	nections["Generation: "][gen].push(pokemon.name);
-	for (const abilityKey in pokedex[id]["abilities"]) {
-		const ability = pokedex[id]["abilities"][abilityKey];
-		if (!nections["Ability: "][ability]) {
-			nections["Ability: "][ability] = [];
-		}
-		nections["Ability: "][ability].push(pokemon.name);
-	}
+	// for (const abilityKey in pokedex[id]["abilities"]) {
+	// 	const ability = pokedex[id]["abilities"][abilityKey];
+	// 	if (!nections["Ability: "][ability]) {
+	// 		nections["Ability: "][ability] = [];
+	// 	}
+	// 	nections["Ability: "][ability].push(pokemon.name);
+	// }
+    if (pokemon.gender === "M") {
+        nections["Gender: "]["Male"].push(pokemon.name);
+    }
+    else if (pokemon.gender === "F") {
+        nections["Gender: "]["Female"].push(pokemon.name);
+    }
 }
 for (const cat in nections) {
 	for (const subcat in nections[cat]) {
@@ -37018,4 +37027,16 @@ nections["Evolves By: "]["Move-Based"] = ["Lickilicky", "Tangrowth", "Ambipom", 
 nections["Evolves By: "]["Friendship"] = ["Crobat", "Pikachu", "Clefairy", "Jigglypuff", "Togetic", "Espeon", "Umbreon", "Blissey", "Marill", "Roselia", "Lopunny", "Chimecho", "Snorlax", "Lucario", "Swoobat", "Leavanny", "Persian", "Silvally", "Sylveon", "Frosmoth"];
 nections["Evolves By: "]["During Daytime"] = ["Espeon", "Roselia", "Chansey", "Lucario", "Tyrantrum", "Gumshoos", "Lycanroc", "Lurantis", "Alcremie", "Sneasler"];
 nections["Evolves By: "]["During Nighttime"] = ["Umbreon", "Gliscor", "Weavile", "Chimecho", "Aurorus", "Raticate", "Marowak", "Lycanroc", "Obstagoon", "Alcremie", "Frosmoth", "Ursaluna", "Houndstone"];
+nections["Fossil"] = {};
+nections["Fossil"][""] = ["Omanyte", "Omastar", "Kabuto", "Kabutops", "Aerodactyl", "Lileep", "Cradily", "Anorith", "Armaldo", "Cranidos", "Rampardos", "Shieldon", "Bastiodon", "Tirtouga", "Carracosta", "Archen", "Archeops", "Tyrunt", "Tyrantrum", "Amaura", "Aurorus", "Dracozolt", "Arctozolt", "Dracovish", "Arctovish"];
+nections["Artificial"] = {};
+nections["Artificial"][""] = ["Porygon", "Porygon2", "Porygon-Z", "Mewtwo", "Baltoy", "Claydol", "Castform", "Banette", "Trubbish", "Garbodor", "Golett", "Golurk", "Genesect", "Type: Null", "Silvally", "Magearna", "Varoom", "Revavroom"];
+nections["Baby"] = {};
+nections["Baby"][""] = ["Pichu", "Cleffa", "Igglybuff", "Togepi", "Tyrogue", "Smoochum", "Elekid", "Magby", "Azurill", "Wynaut", "Budew", "Chingling", "Bonsly", "Mime Jr.", "Happiny", "Munchlax", "Riolu", "Mantyke", "Toxel"];
+nections["Box Art"] = {};
+nections["Box Art"][""] = ["Charizard", "Venusaur", "Blastoise", "Pikachu", "Ho-Oh", "Lugia", "Suicune", "Groudon", "Kyogre", "Rayquaza", "Dialga", "Palkia", "Giratina", "Reshiram", "Zekrom", "Kyurem", "Xerneas", "Yveltal", "Solgaleo", "Lunala", "Necrozma", "Zacian", "Zamazenta", "Koraidon", "Miraidon"];
+nections["Psudeo Legendary"] = {};
+nections["Psudeo Legendary"][""] = ["Dragonite", "Tyranitar", "Salamence", "Metagross", "Garchomp", "Hydreigon", "Goodra", "Kommo-o", "Dragapult", "Baxcalibur"];
+nections["Pikachu-Like"] = {};
+nections["Pikachu-Like"][""] = ["Plusle", "Minun", "Pachirisu", "Emolga", "Dedenne", "Togedemaru", "Morpeko", "Pawmo", "Marill", "Mimikyu"];
 console.log(nections);
