@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="index.css">
+		<script src="logic.js"></script>
+		<script src="nections.js"></script>
+		<title>Poke-Nections</title>
+	</head>
+	<body>
+		<div id="grid">
+			<div id="header">Poke-Nections!</div>
+
+			<div id="completed"></div>
+
+			<div id="cells"></div>
+
+			<div id="buttons">
+				<div id="mistakes">Mistakes remaining: 🔴⚫⚫⚫</div>
+				<button onclick="shuffle()">Shuffle</button>
+				<button onclick="deselect()">Deselect</button>
+				<button onclick="submit()">Submit</button>
+				<button onclick="revealAnswers()">Reveal Answers</button>
+				<button onclick="load()">New Game</button>
+			</div>
+		</div>
+	</body>
+	<script>
+		load();
+	</script>
+</html>
