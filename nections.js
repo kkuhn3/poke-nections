@@ -3270,7 +3270,6 @@ const nections = {
             "Lucario",
             "Swoobat",
             "Leavanny",
-            "Persian",
             "Silvally",
             "Sylveon",
             "Frosmoth"
