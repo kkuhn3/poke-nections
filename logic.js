@@ -70,9 +70,11 @@ function load() {
 							}
 						}
 					}
-					for (const cell of loCells) {
-						if (nections[key][subkey].includes(cell) && loLeftCon[key] && loLeftCon[key][subkey]) {
-							priorityCons.push([key, subkey]);
+					if (Math.random() < i / 3) {
+						for (const cell of loCells) {
+							if (nections[key][subkey].includes(cell) && loLeftCon[key] && loLeftCon[key][subkey]) {
+								priorityCons.push([key, subkey]);
+							}
 						}
 					}
 				}

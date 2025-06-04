@@ -3218,14 +3218,6 @@ const nections = {
             "Chandelure",
             "Aegislash"
         ],
-        "Ice Stone": [
-            "Sandslash",
-            "Ninetales",
-            "Glaceon",
-            "Darmanitan",
-            "Crabominable",
-            "Cetitan"
-        ],
         "Location": [
             "Magnezone",
             "Leafeon",
@@ -3292,8 +3284,6 @@ const nections = {
             "Weavile",
             "Chimecho",
             "Aurorus",
-            "Raticate",
-            "Marowak",
             "Lycanroc",
             "Obstagoon",
             "Alcremie",
