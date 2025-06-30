@@ -40,10 +40,10 @@ function load() {
 		}
 		loAnswers[category + subcategory] = answerArr;
 		if (i === 0) {
-			loColors[category + subcategory] = "green";
+			loColors[category + subcategory] = "yellow";
 		}
 		else if (i === 1) {
-			loColors[category + subcategory] = "yellow";
+			loColors[category + subcategory] = "green";
 		}
 		else if (i === 2) {
 			loColors[category + subcategory] = "blue";
